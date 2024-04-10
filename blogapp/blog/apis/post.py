@@ -1,6 +1,3 @@
-from django.utils.decorators import method_decorator
-from django.views.decorators.cache import cache_page
-from django.views.decorators.vary import vary_on_cookie
 from drf_spectacular.utils import extend_schema
 from rest_framework import serializers, status
 from rest_framework.response import Response
@@ -36,14 +33,12 @@ class PostListApi(APIView):
             )
 
         def get_thumbnail_url(self, obj):
-            return obj.thumbnail_url.url
+            return obj.thumbnail.url if obj.thumbnail else ""
 
     @extend_schema(
         parameters=[FilterSerializer],
         responses=OutPutSerializer,
     )
-    @method_decorator(cache_page(60 * 2))
-    @method_decorator(vary_on_cookie)
     def get(self, request):
         filters_serializer = self.FilterSerializer(data=request.query_params)
         filters_serializer.is_valid(raise_exception=True)
