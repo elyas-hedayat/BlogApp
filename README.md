@@ -36,7 +36,7 @@ services using Docker Compose:
 docker-compose -f docker-compose.yml up -d
 ```
 
-The server should be running, and you can access the application in your web browser at `http://127.0.0.1:8000/:8000`.
+The server should be running, and you can access the application in your web browser at `http://127.0.0.1:8000`.
 
 ### default admin user data
 
