@@ -1,13 +1,14 @@
-import pytest
-from django.test import Client
-from rest_framework.test import APIClient
-from django.urls import reverse
-from devopshobbies.users.models import BaseUser
 import json
+
+import pytest
+from blogapp.users.models import BaseUser
+from django.test import Client
+from django.urls import reverse
+from rest_framework.test import APIClient
 
 
 @pytest.mark.django_db
-def test_unauth_post_api(user1, subscription1, profile1, post1):
+def test_unauth_post_api(user1):
     client = Client()
     url_ = reverse("api:blog:post")
 
@@ -26,10 +27,8 @@ def test_auth_api(api_client, user1, subscription1, profile1, post1):
 
 
 @pytest.mark.django_db
-def test_login(user1, subscription1, profile1, post1):
-    user = BaseUser.objects.create_user(
-        email="js@js.com", password="js.sj"
-    )
+def test_login(user1):
+    user = BaseUser.objects.create_user(email="js@js.com", password="js.sj")
 
     client = APIClient()
     url_ = reverse("api:auth:jwt:login")
