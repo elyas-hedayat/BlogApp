@@ -6,7 +6,6 @@ from django.conf import settings
 from PIL import Image
 
 
-
 @shared_task
 def generate_random_image(post_id: int):
     """
@@ -40,5 +39,6 @@ def generate_random_image(post_id: int):
     # Save the image
     image.save(image_path)
     from blogapp.blog.services.post import post_update
+
     post_update(pk=post_id, data={"thumbnail": image_path})
     return image_path
