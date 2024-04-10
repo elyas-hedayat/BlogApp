@@ -14,7 +14,7 @@ Open your terminal or command prompt and navigate to the directory where you wan
 following command to clone the repository:
 
 ```
-git clone https://github.com/elyas-hedayat/FanapTask
+git clone https://github.com/elyas-hedayat/BlogApp
 ```
 
 ## Step 2: Set Up Virtual Environment
