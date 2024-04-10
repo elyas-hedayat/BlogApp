@@ -1,9 +1,9 @@
+from devopshobbies.users.tasks import hello2 as hello2_task
+from devopshobbies.users.tasks import profile_count_update as profile_update_task
 from django.core.management.base import BaseCommand
 from django.db import transaction
 from django.utils.timezone import get_default_timezone_name
-
-from django_celery_beat.models import IntervalSchedule, CrontabSchedule, PeriodicTask
-from devopshobbies.users.tasks import profile_count_update as profile_update_task, hello2 as hello2_task
+from django_celery_beat.models import CrontabSchedule, IntervalSchedule, PeriodicTask
 
 
 class Command(BaseCommand):
@@ -17,7 +17,7 @@ class Command(BaseCommand):
 
     @transaction.atomic
     def handle(self, *args, **kwargs):
-        print('Deleting all periodic tasks and schedules...\n')
+        print("Deleting all periodic tasks and schedules...\n")
 
         IntervalSchedule.objects.all().delete()
         CrontabSchedule.objects.all().delete()
@@ -41,36 +41,35 @@ class Command(BaseCommand):
         },
         """
         periodic_tasks_data = [
-        {
-            'task': hello2_task,
-            'name': 'Periodic task description',
-            # EveryMinute to everyday
-            # https://crontab.guru/#45_15_*_*_*
-            'cron': {
-                'minute': '*',
-                'hour': '*',
-                'day_of_week': '*',
-                'day_of_month': '*',
-                'month_of_year': '*',
+            {
+                "task": hello2_task,
+                "name": "Periodic task description",
+                # EveryMinute to everyday
+                # https://crontab.guru/#45_15_*_*_*
+                "cron": {
+                    "minute": "*",
+                    "hour": "*",
+                    "day_of_week": "*",
+                    "day_of_month": "*",
+                    "month_of_year": "*",
+                },
+                "enabled": True,
             },
-            'enabled': True
-        },
-        {
-            'task': profile_update_task,
-            'name': 'profile task description',
-            # Everyday at 15:45
-            # https://crontab.guru/#45_15_*_*_*
-            'cron': {
-                'minute': '45',
-                'hour': '3',
-                'day_of_week': '*',
-                'day_of_month': '*',
-                'month_of_year': '*',
+            {
+                "task": profile_update_task,
+                "name": "profile task description",
+                # Everyday at 15:45
+                # https://crontab.guru/#45_15_*_*_*
+                "cron": {
+                    "minute": "45",
+                    "hour": "3",
+                    "day_of_week": "*",
+                    "day_of_month": "*",
+                    "month_of_year": "*",
+                },
+                "enabled": True,
             },
-            'enabled': True
-        },
- 
-                ]
+        ]
 
         timezone = get_default_timezone_name()
 
@@ -78,13 +77,12 @@ class Command(BaseCommand):
             print(f'Setting up {periodic_task["task"].name}')
 
             cron = CrontabSchedule.objects.create(
-                timezone=timezone,
-                **periodic_task['cron']
+                timezone=timezone, **periodic_task["cron"]
             )
 
             PeriodicTask.objects.create(
-                name=periodic_task['name'],
-                task=periodic_task['task'].name,
+                name=periodic_task["name"],
+                task=periodic_task["task"].name,
                 crontab=cron,
-                enabled=periodic_task['enabled']
+                enabled=periodic_task["enabled"],
             )
