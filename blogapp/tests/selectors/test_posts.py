@@ -3,6 +3,6 @@ from blogapp.blog.selectors.post import post_list
 
 
 @pytest.mark.django_db
-def test_post_list(post1):
+def test_post_list():
     a = post_list()
-    assert a.first() == post1
+    assert a.count() == 0

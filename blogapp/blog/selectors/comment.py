@@ -1,8 +1,10 @@
+from django.db.models import QuerySet
+
 from blogapp.blog.models import Comment
 from blogapp.blog.selectors.post import post_detail
 
 
-def post_comment_list(*, post_id: int) -> Comment:
+def post_comment_list(*, post_id: int) -> QuerySet[Comment]:
     """
     Retrieve a queryset of Comment instances associated with a specific Post instance.
 
