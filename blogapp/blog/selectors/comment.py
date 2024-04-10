@@ -17,4 +17,4 @@ def post_comment_list(*, post_id: int) -> Comment:
     """
     post_instance = post_detail(pk=post_id)
     qs = Comment.objects.filter(post=post_instance)
-    return qs
+    return qs.select_related("post", "parent")
