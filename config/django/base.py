@@ -88,13 +88,6 @@ DATABASES = {
     ),
 }
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
-#
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.sqlite3",
-#         "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
-#     }
-# }
 
 if os.environ.get("GITHUB_WORKFLOW"):
     DATABASES = {
@@ -165,6 +158,10 @@ CACHES = {
 CACHE_TTL = 60 * 15
 
 APP_DOMAIN = env("APP_DOMAIN", default="http://localhost:8000")
+
+FIXTURE_DIRS = [
+    os.path.join(BASE_DIR, "fixtures"),
+]
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 

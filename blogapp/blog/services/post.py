@@ -2,6 +2,7 @@ from rest_framework.generics import get_object_or_404
 
 from blogapp.blog.models import Post
 from blogapp.common.services import model_update
+from blogapp.tasks.tasks import generate_random_image
 
 
 def post_create(*, title: str, content: str) -> Post:
@@ -19,6 +20,7 @@ def post_create(*, title: str, content: str) -> Post:
         title=title,
         content=content,
     )
+    generate_random_image.delay(post.id)
     return post
 
 

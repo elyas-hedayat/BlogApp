@@ -10,7 +10,8 @@ from blogapp.users.models import BaseUser, Profile
 from blogapp.users.selectors import get_profile
 from blogapp.users.services import register
 
-from .validators import letter_validator, number_validator, special_char_validator
+from .validators import (letter_validator, number_validator,
+                         special_char_validator)
 
 
 class ProfileApi(ApiAuthMixin, APIView):

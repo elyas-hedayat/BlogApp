@@ -1,4 +1,5 @@
 import pytest
+
 from blogapp.blog.services.post import post_create
 
 

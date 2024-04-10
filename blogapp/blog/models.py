@@ -10,6 +10,7 @@ class Post(BaseModel):
     content = models.CharField(
         max_length=1000,
     )
+    thumbnail = models.ImageField(blank="", default="")
 
     def __str__(self):
         return self.title

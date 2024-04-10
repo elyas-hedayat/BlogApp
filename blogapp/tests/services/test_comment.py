@@ -1,5 +1,6 @@
 import pytest
-from blogapp.blog.models import Post, Comment
+
+from blogapp.blog.models import Comment, Post
 from blogapp.blog.services.comment import comment_create
 from blogapp.blog.services.post import post_create
 

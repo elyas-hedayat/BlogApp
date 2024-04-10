@@ -1,5 +1,6 @@
 import pytest
-from blogapp.blog.models import Post, Comment
+
+from blogapp.blog.models import Comment, Post
 from blogapp.blog.selectors.comment import post_comment_list
 
 

@@ -1,10 +1,14 @@
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
+from django.views.decorators.vary import vary_on_cookie
 from drf_spectacular.utils import extend_schema
 from rest_framework import serializers, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from blogapp.api.mixins import ApiAuthMixin
-from blogapp.api.pagination import LimitOffsetPagination, get_paginated_response_context
+from blogapp.api.pagination import (LimitOffsetPagination,
+                                    get_paginated_response_context)
 from blogapp.blog.models import Post
 from blogapp.blog.selectors.post import post_detail, post_list
 from blogapp.blog.services.post import post_create, post_update
@@ -18,14 +22,21 @@ class PostListApi(APIView):
         title = serializers.CharField(required=False, max_length=100)
 
     class OutPutSerializer(serializers.ModelSerializer):
+        thumbnail_url = serializers.SerializerMethodField()
+
         class Meta:
             model = Post
-            fields = ("pk", "title", "content", "created_at", "updated_at")
+            fields = ("pk", "title", "content", "thumbnail", "thumbnail_url", "created_at", "updated_at")
+
+        def get_thumbnail_url(self, obj):
+            return obj.thumbnail_url.url
 
     @extend_schema(
         parameters=[FilterSerializer],
         responses=OutPutSerializer,
     )
+    @method_decorator(cache_page(60 * 2))
+    @method_decorator(vary_on_cookie)
     def get(self, request):
         filters_serializer = self.FilterSerializer(data=request.query_params)
         filters_serializer.is_valid(raise_exception=True)

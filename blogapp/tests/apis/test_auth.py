@@ -1,10 +1,11 @@
 import json
 
 import pytest
-from blogapp.users.models import BaseUser
 from django.test import Client
 from django.urls import reverse
 from rest_framework.test import APIClient
+
+from blogapp.users.models import BaseUser
 
 
 @pytest.mark.django_db

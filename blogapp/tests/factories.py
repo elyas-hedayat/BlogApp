@@ -1,8 +1,9 @@
 import factory
+from django.utils import timezone
+
 from blogapp.blog.models import Post
 from blogapp.tests.utils import faker
 from blogapp.users.models import BaseUser
-from django.utils import timezone
 
 
 class BaseUserFactory(factory.django.DjangoModelFactory):

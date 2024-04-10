@@ -1,7 +1,7 @@
 from django.urls import path
 
-from .apis.post import PostListApi, PostDetailApi, PostCreateApi, PostUpdateApi
-from .apis.comment import CommentListApi, CommentCreateApi
+from .apis.comment import CommentCreateApi, CommentListApi
+from .apis.post import PostCreateApi, PostDetailApi, PostListApi, PostUpdateApi
 
 app_name = "blog"
 
