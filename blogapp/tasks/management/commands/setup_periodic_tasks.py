@@ -1,9 +1,11 @@
 from devopshobbies.users.tasks import hello2 as hello2_task
-from devopshobbies.users.tasks import profile_count_update as profile_update_task
+from devopshobbies.users.tasks import \
+    profile_count_update as profile_update_task
 from django.core.management.base import BaseCommand
 from django.db import transaction
 from django.utils.timezone import get_default_timezone_name
-from django_celery_beat.models import CrontabSchedule, IntervalSchedule, PeriodicTask
+from django_celery_beat.models import (CrontabSchedule, IntervalSchedule,
+                                       PeriodicTask)
 
 
 class Command(BaseCommand):

@@ -4,7 +4,8 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from blogapp.api.mixins import ApiAuthMixin
-from blogapp.api.pagination import LimitOffsetPagination, get_paginated_response_context
+from blogapp.api.pagination import (LimitOffsetPagination,
+                                    get_paginated_response_context)
 from blogapp.blog.models import Comment
 from blogapp.blog.selectors.comment import post_comment_list
 from blogapp.blog.services.comment import comment_create
