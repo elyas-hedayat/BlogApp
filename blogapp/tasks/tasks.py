@@ -30,7 +30,7 @@ def generate_random_image(post_id: int):
     image.putdata(random_pixels)
 
     image_path = os.path.join(
-        settings.MEDIA_ROOT, "posts", str(post_id), "random_image.png"
+        settings.MEDIA_ROOT, "post_media", str(post_id), "random_image.png"
     )
 
     # Create the directory for the image if it doesn't exist
