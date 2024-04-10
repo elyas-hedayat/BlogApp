@@ -69,9 +69,9 @@ class PostDetailApi(ApiAuthMixin, APIView):
     @extend_schema(
         responses=OutPutDetailSerializer,
     )
-    def get(self, request, pk):
+    def get(self, request, post_id):
         try:
-            query = post_detail(pk=pk)
+            query = post_detail(pk=post_id)
         except Exception as ex:
             return Response(
                 {"detail": "Filter Error - " + str(ex)},
