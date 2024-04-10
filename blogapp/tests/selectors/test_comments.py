@@ -2,6 +2,7 @@ import pytest
 from blogapp.blog.models import Post, Comment
 from blogapp.blog.selectors.comment import post_comment_list
 
+
 @pytest.fixture
 def post():
     return Post.objects.create(title="Test Post", content="This is a test post.")
@@ -19,6 +20,7 @@ def comments(post):
         parent=parent_comment,
     )
     return parent_comment, child_comment
+
 
 @pytest.mark.django_db
 def test_post_comment_list(post, comments):
