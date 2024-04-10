@@ -81,9 +81,11 @@ WSGI_APPLICATION = "config.wsgi.application"
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 #
 DATABASES = {
-    'default': env.db('DATABASE_URL', default='psql://user:password@127.0.0.1:5432/blogapp'),
+    "default": env.db(
+        "DATABASE_URL", default="psql://user:password@127.0.0.1:5432/blogapp"
+    ),
 }
-DATABASES['default']['ATOMIC_REQUESTS'] = True
+DATABASES["default"]["ATOMIC_REQUESTS"] = True
 #
 # DATABASES = {
 #     "default": {

@@ -12,9 +12,7 @@ def post():
 @pytest.mark.django_db
 def test_comment_create_without_parent(post):
     comment = comment_create(
-        post=post.id,
-        email="test@example.com",
-        text="This is a test comment."
+        post=post.id, email="test@example.com", text="This is a test comment."
     )
 
     assert isinstance(comment, Comment)
@@ -27,16 +25,14 @@ def test_comment_create_without_parent(post):
 @pytest.mark.django_db
 def test_comment_create_with_parent(post):
     parent_comment = comment_create(
-        post=post.id,
-        email="parent@example.com",
-        text="This is a parent comment."
+        post=post.id, email="parent@example.com", text="This is a parent comment."
     )
 
     child_comment = comment_create(
         post=post.id,
         email="child@example.com",
         text="This is a child comment.",
-        parent=parent_comment.id
+        parent=parent_comment.id,
     )
 
     assert isinstance(child_comment, Comment)

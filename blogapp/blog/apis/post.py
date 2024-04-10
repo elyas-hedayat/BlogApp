@@ -95,7 +95,9 @@ class PostCreateApi(ApiAuthMixin, APIView):
                 {"detail": "Database Error - " + str(ex)},
                 status=status.HTTP_400_BAD_REQUEST,
             )
-        return Response(self.OutPutSerializer(query).data, status=status.HTTP_201_CREATED)
+        return Response(
+            self.OutPutSerializer(query).data, status=status.HTTP_201_CREATED
+        )
 
 
 class PostUpdateApi(ApiAuthMixin, APIView):

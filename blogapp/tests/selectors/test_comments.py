@@ -11,15 +11,13 @@ def post():
 @pytest.fixture
 def comments(post):
     parent_comment = Comment.objects.create(
-        post=post,
-        email="parent@example.com",
-        text="This is a parent comment."
+        post=post, email="parent@example.com", text="This is a parent comment."
     )
     child_comment = Comment.objects.create(
         post=post,
         email="child@example.com",
         text="This is a child comment.",
-        parent=parent_comment
+        parent=parent_comment,
     )
     return parent_comment, child_comment
 

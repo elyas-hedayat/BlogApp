@@ -7,8 +7,6 @@ from django.urls import reverse
 from rest_framework.test import APIClient
 
 
-
-
 @pytest.mark.django_db
 def test_unauth_api():
     client = Client()

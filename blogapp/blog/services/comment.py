@@ -1,7 +1,9 @@
 from blogapp.blog.models import Comment
 
 
-def comment_create(*, post: int, email: str, text: str, parent: None | int = None) -> Comment:
+def comment_create(
+    *, post: int, email: str, text: str, parent: None | int = None
+) -> Comment:
     """
     Create a new comment associated with a specific post.
 

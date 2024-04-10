@@ -19,13 +19,12 @@ class CommentListApi(APIView):
 
         class Meta:
             model = Comment
-            fields = ['pk', 'text', 'email', 'replies']
+            fields = ["pk", "text", "email", "replies"]
 
     @extend_schema(
         responses=OutPutSerializer,
     )
     def get(self, request, post_id):
-
         try:
             query = post_comment_list(post_id=post_id)
         except Exception as ex:
@@ -53,7 +52,13 @@ class CommentCreateApi(ApiAuthMixin, APIView):
     class OutPutSerializer(serializers.ModelSerializer):
         class Meta:
             model = Comment
-            fields = ['id', 'post', 'parent', 'text', 'email', ]
+            fields = [
+                "id",
+                "post",
+                "parent",
+                "text",
+                "email",
+            ]
 
     @extend_schema(
         responses=OutPutSerializer,
@@ -74,4 +79,6 @@ class CommentCreateApi(ApiAuthMixin, APIView):
                 {"detail": "Database Error - " + str(ex)},
                 status=status.HTTP_400_BAD_REQUEST,
             )
-        return Response(self.OutPutSerializer(query).data, status=status.HTTP_201_CREATED)
+        return Response(
+            self.OutPutSerializer(query).data, status=status.HTTP_201_CREATED
+        )
