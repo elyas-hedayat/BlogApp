@@ -2,7 +2,6 @@ import pytest
 from blogapp.blog.models import Post, Comment
 from blogapp.blog.selectors.comment import post_comment_list
 
-
 @pytest.fixture
 def post():
     return Post.objects.create(title="Test Post", content="This is a test post.")
@@ -21,12 +20,11 @@ def comments(post):
     )
     return parent_comment, child_comment
 
-
+@pytest.mark.django_db
 def test_post_comment_list(post, comments):
     parent_comment, child_comment = comments
     comments = post_comment_list(post_id=post.id)
 
-    assert isinstance(comments, Comment.objects.filter)
     assert comments.count() == 2
 
     for comment in comments:
